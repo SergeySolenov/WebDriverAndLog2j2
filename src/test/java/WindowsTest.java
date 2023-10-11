@@ -8,19 +8,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class WindowsTest {
     private String login = "diveroj856@htoal.com";
     private String password = "!Diveroj856";
-    Logger log = LogManager.getLogger(WindowsTest.class);
-    WebDriver driver;
+    private Logger log = LogManager.getLogger(WindowsTest.class);
+    private WebDriver driver;
 
     @BeforeAll
     public static void setup() {
         WebDriverManager.chromedriver().setup();
     }
+
     @BeforeEach
     public void start(TestInfo info) {
         ChromeOptions options = new ChromeOptions();
@@ -58,6 +60,7 @@ public class WindowsTest {
             driver.quit();
         }
     }
+
     @Test
     @Tag(value = "headless")
     public void headlessTest() {
@@ -70,6 +73,7 @@ public class WindowsTest {
         Assertions.assertEquals(expectedStr, actualStr);
         log.info("Осуществили проверку, что в поисковой выдаче первый результат Онлайн‑курсы для профессионалов, дистанционное обучение современным ...");
     }
+
     @Test
     @Tag(value = "fullscreen")
     public void fullscreenTest() {
@@ -84,6 +88,7 @@ public class WindowsTest {
             log.info("Картинка не открылась в модальном окне.");
         }
     }
+
     @Test
     @Tag(value = "maximize")
     public void maximizeTest() {
@@ -94,12 +99,14 @@ public class WindowsTest {
         log.info(driver.manage().getCookies());
         log.info("Вывод в лог все cookies");
     }
+
     private void loginInOtus() {
         driver.findElement(By.cssSelector(".sc-mrx253-0.enxKCy.sc-945rct-0.iOoJwQ")).click();
         clearAndEnter(By.cssSelector("input[name=\"email\"]"), login);
         clearAndEnter(By.cssSelector("input[type=\"password\"]"), password);
         driver.findElement(By.xpath("//div[contains(text(),'Войти')]")).click();
     }
+
     private void clearAndEnter(By by, String text) {
         driver.findElement(by).clear();
         driver.findElement(by).sendKeys(text);
